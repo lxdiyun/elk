@@ -145,7 +145,7 @@ sudo systemctl stop firewalld iperf -s -4 -p 45678
 ```
 
 ### Kibana
-First, copy the [kibana](./kibana) folder to your server. Then, update the [docker-compose file](./es/docker-compose.yml) and the certs folder with the appropriate certificate files. You can use the same certificate files that were generated for Elasticsearch. 
+First, copy the [kibana](./kibana) folder to your server. Then, update the [docker-compose file](./kibana/docker-compose.yml) and the certs folder with the appropriate certificate files. You can use the same certificate files that were generated for Elasticsearch. 
 
 Remember to update the [.env](./es/kibana/.env) file`ELASTICSEARCH` (ES host)and `NODE_NAME`(kibana node name), `KIBANA_SYSTEM_PASSWORD`(password generated [previously](####  4. Start up the docker instance and generate passwords) ) 
 
