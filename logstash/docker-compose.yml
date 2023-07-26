@@ -1,0 +1,22 @@
+version: '3'
+services:
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.7.1
+    container_name: logstash
+    restart: always
+    env_file:
+      - ./.env
+    volumes:
+      - ./config/pipelines.yml:/usr/share/logstash/config/pipelines.yml
+      - ./config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./pipeline:/usr/share/logstash/pipeline/
+      - ./jdbc:/usr/share/logstash/jdbc/
+      - ./certs:/usr/share/logstash/certs
+    environment:
+      - TZ=Asia/Shanghai
+      - "LS_JAVA_OPTS=-Xms4g -Xmx4g"
+    extra_hosts:
+      - "elasticsearch:${ELASTICSEARCH_HOST}"
+        #    command: logstash -w 1 -f /usr/share/logstash/pipeline/
+    ports:
+      - 9600:9600

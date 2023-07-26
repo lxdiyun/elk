@@ -1,0 +1,6 @@
+api.ssl.enabled: true
+api.ssl.keystore.password: ""
+api.ssl.keystore.path: /usr/share/logstash/certs/es-node-1.p12
+http.host: 0.0.0.0
+node.name: ${NODE_NAME}
+pipeline.ordered: false

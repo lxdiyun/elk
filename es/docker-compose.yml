@@ -1,0 +1,41 @@
+version: '3.7'
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.7.1
+    container_name: elasticsearch
+    restart: always
+    environment:
+      - node.name=es-node-1
+      - cluster.name=docker-cluster
+      - bootstrap.memory_lock=true
+#     - xpack.monitoring.collection.enabled=true
+#     - discovery.seed_hosts=es-node-1
+      - cluster.initial_master_nodes=es-node-1
+      - network.host=0.0.0.0
+      - network.publish_host=es-node-1
+#     - xpack.security.enabled=false
+      - xpack.security.http.ssl.enabled=true
+#     - xpack.security.http.ssl.key=certs/es-node-1.key
+#     - xpack.security.http.ssl.certificate=certs/es-node-1.crt
+      - xpack.security.http.ssl.keystore.path=certs/es-node-1.p12
+      - xpack.security.http.ssl.certificate_authorities=certs/ca.crt
+      - xpack.security.http.ssl.verification_mode=certificate
+      - xpack.security.transport.ssl.enabled=true
+#     - xpack.security.transport.ssl.key=certs/es-node-1.key
+#     - xpack.security.transport.ssl.certificate=certs/es-node-1.crt
+      - xpack.security.transport.ssl.keystore.path=certs/es-node-1.p12
+      - xpack.security.transport.ssl.certificate_authorities=certs/ca.crt
+      - xpack.security.transport.ssl.verification_mode=certificate
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - ./certs:/usr/share/elasticsearch/config/certs
+      - /mnt/data:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+#   extra_hosts:
+#     - "es-node-2: <your-node-2-ip>"
+    network_mode: bridge
