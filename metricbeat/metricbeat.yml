@@ -1,0 +1,66 @@
+name: "${NODE_NAME}"
+http.enabled: true
+metricbeat.modules:
+#- module: system
+  #metricsets: ["cpu", "load", "memory", "network", "process", "process_summary", "socket_summary", "core"]
+  #enabled: true
+  #period: 10s
+  #processes: ['.*']
+
+#- module: docker
+  #metricsets: ["container", "cpu", "diskio", "healthcheck", "memory", "network"]
+  #hosts: ["unix:///var/run/docker.sock"]
+  #period: 10s
+  #enabled: true
+  #add_docker_metadata: true
+  #containers.ids:
+    #- <container-id>
+
+- module: beat
+  hosts: ["http://localhost:5066"]
+  xpack.enabled: true
+  period: 10s
+  metricsets: ["stats", "state"]
+
+- module: elasticsearch
+  #metricsets: ["node", "node_stats", "index", "shard"]
+  xpack.enabled: true
+  period: 10s
+  hosts: ${ELASTICSEARCH_HOST}
+  ssl.certificate_authorities: ["/usr/share/metricbeat/certs/ca.crt"]
+  username: "remote_monitoring_user"
+  password: "${REMOTE_MONITORING_USER_PASSWORD}"
+
+- module: kibana
+  #metricsets: ["status"]
+  xpack.enabled: true
+  period: 10s
+  hosts: ${KIBANA_HOST}
+  ssl.certificate_authorities: ["/usr/share/metricbeat/certs/ca.crt"]
+  username: "remote_monitoring_user"
+  password: "${REMOTE_MONITORING_USER_PASSWORD}"
+
+- module: logstash
+  xpack.enabled: true
+  #metricsets: ["node"]
+  period: 10s
+  hosts: ${LOGSTASH_HOST}
+  ssl.certificate_authorities: ["/usr/share/metricbeat/certs/ca.crt"]
+#  ssl.verification_mode: certificate
+
+output.elasticsearch:
+  hosts: ["https://elasticsearch:9200"]
+  ssl.certificate_authorities: ["/usr/share/metricbeat/certs/ca.crt"]
+  username: "remote_monitoring_user"
+  password: "${REMOTE_MONITORING_USER_PASSWORD}"
+
+setup.kibana:
+  host: "https://kibana:5601"
+  username: "kibana_system"
+  password: "${KIBANA_SYSTEM_PASSWORD}"
+  ssl.certificate_authorities: ["/usr/share/metricbeat/certs/ca.crt"]
+
+
+#processors:
+#- add_cloud_metadata: ~
+#- add_docker_metadata: ~

@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  metricbeat:
+    image: docker.elastic.co/beats/metricbeat:8.7.1
+    restart: always
+    env_file:
+      ./.env
+    volumes:
+      #- /var/run/docker.sock:/var/run/docker.sock
+      - ./metricbeat.yml:/usr/share/metricbeat/metricbeat.yml
+      - ./certs:/usr/share/metricbeat/certs
+    extra_hosts:
+      - "elasticsearch:${elasticsearch}"
+      - "kibana:${kibana}"
+      - "es-node-1:${es1}"
+      - "es-node-2:${es2}"
+      - "es-node-3:${es3}"
+      - "es-node-4:${es4}"
+      - "es-node-5:${es5}"
+      - "es-node-6:${es6}"
+      - "es-node-7:${es7}"
+    command: metricbeat -e
