@@ -205,4 +205,4 @@ sudo docker-compose up -d
 sudo docker-compose logs -f metricbeat
 ```
 
-This completes the setup of the ELK stack with Docker and SSL. Remember to always verify each service is running correctly after setup.
+This completes the setup of the ELK stack with Docker and SSL. Remember to always verify each service is running correctly after setup. You can check the status at https://<kibana_server>:5601/app/monitoring#/overview.
