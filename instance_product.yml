@@ -2,14 +2,14 @@ instances:
   - name: 'es-node-1'
     dns: ['es1', 'es-node-1', 'es-master', 'elasticsearch1', 'elasticsearch', 'kibana', 'kibana1', ]
   - name: 'es-node-2'
-    dns: ['es2', 'elasticsearch2', 'es-node-2']
+    dns: ['es2', 'elasticsearch2', 'es-node-2', 'elasticsearch']
   - name: 'es-node-3'
-    dns: ['es3', 'elasticsearch3', 'es-node-3']
+    dns: ['es3', 'elasticsearch3', 'es-node-3', 'elasticsearch']
   - name: 'es-node-4'
-    dns: ['es4', 'elasticsearch4', 'es-node-4']
+    dns: ['es4', 'elasticsearch4', 'es-node-4', 'elasticsearch']
   - name: 'es-node-5'
-    dns: ['es5', 'elasticsearch5', 'es-node-5']
+    dns: ['es5', 'elasticsearch5', 'es-node-5', 'elasticsearch']
   - name: 'es-node-6'
-    dns: ['es6', 'elasticsearch6', 'es-node-6']
+    dns: ['es6', 'elasticsearch6', 'es-node-6', 'elasticsearch']
   - name: 'es-node-7'
-    dns: ['es7', 'elasticsearch7', 'es-node-7']
+    dns: ['es7', 'elasticsearch7', 'es-node-7', 'elasticsearch']
